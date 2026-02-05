@@ -6,7 +6,7 @@ import * as XLSX from 'xlsx';
 export default function ReportPage() {
   const {
     project, analysisResults, departmentAnalyses, aiComments, questions,
-    categories, responses, settings,
+    categories, responses,
   } = useSurveyStore();
   const [isExporting, setIsExporting] = useState(false);
 
@@ -70,7 +70,7 @@ export default function ReportPage() {
       XLSX.utils.book_append_sheet(wb, ws3, '優良項目');
 
       // 優先順位シート
-      const priorityData = [
+      const priorityData: (string | number)[][] = [
         ['優先順位（ISA分析）', '', '', '', ''],
         ['象限', '設問', '平均値', '重要度', 'AIコメント'],
       ];

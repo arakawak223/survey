@@ -26,9 +26,6 @@ export default function CategoriesPage() {
     setCategories(categories.filter((c) => c.id !== id));
   };
 
-  const getCategoryName = (id: string) =>
-    categories.find((c) => c.id === id)?.name || '未分類';
-
   return (
     <div>
       <h2 className="text-xl font-bold text-slate-800 mb-6">分類設定</h2>
