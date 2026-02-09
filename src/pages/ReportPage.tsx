@@ -89,7 +89,7 @@ export default function ReportPage() {
       XLSX.utils.book_append_sheet(wb, ws4, '優先順位');
 
       // 部署別シート
-      const departments = [...new Set(departmentAnalyses.map((d) => d.department))];
+      const departments = [...new Set(departmentAnalyses.map((d) => d.department))].sort((a, b) => a.localeCompare(b, 'ja', { numeric: true }));
       if (departments.length > 0) {
         const deptHeader = ['設問', '全社平均', ...departments];
         const deptRows = questions.map((q) => {

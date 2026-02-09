@@ -45,7 +45,7 @@ export default function AnalysisPage() {
 
   const issues = analysisResults.filter((r) => r.extractionType === 'issue');
   const excellents = analysisResults.filter((r) => r.extractionType === 'excellent');
-  const departments = [...new Set(departmentAnalyses.map((d) => d.department))];
+  const departments = [...new Set(departmentAnalyses.map((d) => d.department))].sort((a, b) => a.localeCompare(b, 'ja', { numeric: true }));
 
   const generateComment = useCallback(async (
     result: AnalysisResult,

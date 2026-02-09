@@ -94,12 +94,16 @@ export default function ChartsPage() {
   ] as const;
 
   // Bar chart data
-  const barData = analysisResults.map((r) => ({
-    name: r.questionLabel.length > 8 ? r.questionLabel.slice(0, 8) + '…' : r.questionLabel,
-    fullName: r.questionLabel,
-    平均値: r.mean,
-    fill: r.extractionType === 'issue' ? '#ef4444' : r.extractionType === 'excellent' ? '#10b981' : '#3b82f6',
-  }));
+  const barData = analysisResults.map((r, i) => {
+    const num = `Q${i + 1}`;
+    const label = r.questionLabel.length > 6 ? r.questionLabel.slice(0, 6) + '…' : r.questionLabel;
+    return {
+      name: `${num}. ${label}`,
+      fullName: `Q${i + 1}. ${r.questionLabel}`,
+      平均値: r.mean,
+      fill: r.extractionType === 'issue' ? '#ef4444' : r.extractionType === 'excellent' ? '#10b981' : '#3b82f6',
+    };
+  });
 
   // Radar chart data by category
   const radarData = categories
@@ -125,7 +129,7 @@ export default function ChartsPage() {
     : [];
 
   // Heatmap data
-  const departments = [...new Set(departmentAnalyses.map((d) => d.department))];
+  const departments = [...new Set(departmentAnalyses.map((d) => d.department))].sort((a, b) => a.localeCompare(b, 'ja', { numeric: true }));
 
   return (
     <div>

@@ -430,7 +430,7 @@ function extractDepartmentScores(
 
   return {
     questions,
-    departments: deptColumns,
+    departments: [...deptColumns].sort((a, b) => a.localeCompare(b, 'ja', { numeric: true })),
     overallDepartment: overallDept,
   };
 }

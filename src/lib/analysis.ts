@@ -7,6 +7,11 @@ import type {
 } from '@/types';
 import { CATEGORY_KEYWORDS } from '@/types';
 
+// 部署名の自然順ソート（鋳造1課→2課→…→鋳造検査）
+export function sortDepartments(departments: string[]): string[] {
+  return [...departments].sort((a, b) => a.localeCompare(b, 'ja', { numeric: true }));
+}
+
 // カテゴリ自動分類
 export function classifyQuestion(questionLabel: string): string {
   const label = questionLabel.toLowerCase();
@@ -161,7 +166,7 @@ export function runDepartmentAnalysis(
   questions: Question[],
   overallResults: AnalysisResult[]
 ): DepartmentAnalysis[] {
-  const departments = [...new Set(responses.map((r) => r.department).filter(Boolean))];
+  const departments = sortDepartments([...new Set(responses.map((r) => r.department).filter(Boolean))]);
   const results: DepartmentAnalysis[] = [];
 
   for (const dept of departments) {
